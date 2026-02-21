@@ -23,6 +23,68 @@ and create my first basic Terraform configuration file.
 
 <hr>
 
+<h2>⚙️ Terraform Installation (Official Method)</h2>
+
+<p>
+In this section, Terraform is installed using the official HashiCorp APT repository.
+This is the recommended and production-ready method.
+</p>
+
+<h3>Step 1: Update System and Install Required Packages</h3>
+
+<pre>
+sudo apt-get update && sudo apt-get install -y gnupg software-properties-common curl
+</pre>
+
+<p>
+This installs required dependencies like:
+</p>
+
+<ul>
+  <li><b>gnupg</b> → For verifying security keys</li>
+  <li><b>software-properties-common</b> → For managing repositories</li>
+  <li><b>curl</b> → For secure downloads</li>
+</ul>
+
+<h3>Step 2: Add HashiCorp GPG Key</h3>
+
+<pre>
+curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+</pre>
+
+<p>
+This adds HashiCorp’s official security key to the system.
+</p>
+
+<h3>Step 3: Add Official HashiCorp Repository</h3>
+
+<pre>
+sudo apt-add-repository "deb https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+</pre>
+
+<p>
+This command tells Ubuntu to download Terraform from HashiCorp’s official repository.
+</p>
+
+<h3>Step 4: Install Terraform</h3>
+
+<pre>
+sudo apt-get update
+sudo apt-get install terraform
+</pre>
+
+<h3>Step 5: Verify Installation</h3>
+
+<pre>
+terraform -version
+</pre>
+
+<p>
+If installation is successful, the Terraform version will be displayed.
+</p>
+
+<hr>
+
 <h2>📂 Files in This Folder</h2>
 
 <ul>
