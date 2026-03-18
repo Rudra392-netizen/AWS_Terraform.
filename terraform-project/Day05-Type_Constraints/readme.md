@@ -1,184 +1,215 @@
-# Create README.md file with the provided content
+# 🚀 Terraform Type Constraints
 
-content = """<h1 align="center">Terraform Type Constraints</h1>
+A clean and beginner-friendly guide to understand **Terraform variable type constraints** with practical examples.
 
-<p align="center">
-Simple and beginner-friendly guide to understand Terraform variable types.
-</p>
+---
 
-<hr>
+## 📌 What are Type Constraints?
 
-<h2>📌 What are Type Constraints?</h2>
+Type constraints define **what kind of value a variable can accept** in Terraform.
 
-<p>
-Type constraints define <b>what kind of value</b> a variable can accept in Terraform.
-They help avoid errors and make your code safe and clear.
-</p>
+👉 Simple:
+> Type constraint = rule for what data a variable can store
 
-<p><b>Simple meaning:</b> Type constraint = rule for variable value</p>
+---
 
-<hr>
+## 🎯 Why Use Type Constraints?
 
-<h2>🎯 Why Use Type Constraints?</h2>
+- ✅ Prevent wrong inputs  
+- ✅ Improve readability  
+- ✅ Reduce bugs  
+- ✅ Make code production-ready  
 
-<ul>
-  <li>Prevent wrong inputs</li>
-  <li>Improve code readability</li>
-  <li>Reduce errors</li>
-  <li>Make code professional</li>
-</ul>
+---
 
-<hr>
+## 🧩 Types of Type Constraints
 
-<h2>🧩 Types of Type Constraints</h2>
+---
 
-<h3>1. String</h3>
-<p>Used for text values.</p>
+### 1. 🔤 String
 
-<pre><code>variable "name" {
+Stores text values.
+
+```hcl
+variable "name" {
   type = string
-}</code></pre>
+}
+```
 
-<p><b>Example:</b> "Rudra"</p>
+**Example:**
+```hcl
+name = "Rudra"
+```
 
-<hr>
+---
 
-<h3>2. Number</h3>
-<p>Used for numeric values.</p>
+### 2. 🔢 Number
 
-<pre><code>variable "port" {
+Stores numeric values.
+
+```hcl
+variable "port" {
   type = number
-}</code></pre>
+}
+```
 
-<p><b>Example:</b> 8080</p>
+**Example:**
+```hcl
+port = 8080
+```
 
-<hr>
+---
 
-<h3>3. Boolean</h3>
-<p>Used for true/false values.</p>
+### 3. 🔘 Boolean
 
-<pre><code>variable "monitoring" {
+Stores true/false values.
+
+```hcl
+variable "monitoring" {
   type = bool
-}</code></pre>
+}
+```
 
-<p><b>Example:</b> true</p>
+**Example:**
+```hcl
+monitoring = true
+```
 
-<hr>
+---
 
-<h3>4. List</h3>
-<p>Used for multiple values (ordered).</p>
+### 4. 📋 List
 
-<pre><code>variable "instance_type" {
+Stores multiple values (ordered).
+
+```hcl
+variable "instance_type" {
   type = list(string)
-}</code></pre>
+}
+```
 
-<p><b>Example:</b></p>
+**Example:**
+```hcl
+instance_type = ["t2.micro", "t2.medium"]
+```
 
-<pre><code>["t2.micro", "t2.medium"]</code></pre>
+**Usage in resource:**
+```hcl
+resource "aws_instance" "example" {
+  count         = 2
+  instance_type = var.instance_type[count.index]
+}
+```
 
-<p><b>Access:</b> var.instance_type[0]</p>
+---
 
-<hr>
+### 5. 🔁 Set
 
-<h3>5. Set</h3>
-<p>Used for unique values (no duplicates).</p>
+Stores unique values (no duplicates).
 
-<pre><code>variable "regions" {
+```hcl
+variable "regions" {
   type = set(string)
-}</code></pre>
+}
+```
 
-<p><b>Example:</b></p>
+**Example:**
+```hcl
+regions = ["ap-south-1", "us-east-1"]
+```
 
-<pre><code>["ap-south-1", "us-east-1"]</code></pre>
+⚠️ Order is not guaranteed.
 
-<p><b>Note:</b> Order is not guaranteed.</p>
+---
 
-<hr>
+### 6. 🗂️ Map
 
-<h3>6. Map</h3>
-<p>Used for key-value pairs.</p>
+Stores key-value pairs.
 
-<pre><code>variable "instance_map" {
+```hcl
+variable "instance_map" {
   type = map(string)
-}</code></pre>
+}
+```
 
-<p><b>Example:</b></p>
-
-<pre><code>{
+**Example:**
+```hcl
+instance_map = {
   dev  = "t2.micro"
   prod = "t2.medium"
-}</code></pre>
+}
+```
 
-<p><b>Access:</b> var.instance_map["dev"]</p>
+**Usage:**
+```hcl
+instance_type = var.instance_map["dev"]
+```
 
-<hr>
+---
 
-<h2>📊 Summary</h2>
+## 🔥 Real DevOps Example
 
-<table border="1" cellpadding="8">
-  <tr>
-    <th>Type</th>
-    <th>Use</th>
-    <th>Example</th>
-  </tr>
-  <tr>
-    <td>string</td>
-    <td>Text</td>
-    <td>"hello"</td>
-  </tr>
-  <tr>
-    <td>number</td>
-    <td>Number</td>
-    <td>100</td>
-  </tr>
-  <tr>
-    <td>bool</td>
-    <td>true/false</td>
-    <td>true</td>
-  </tr>
-  <tr>
-    <td>list</td>
-    <td>Multiple ordered values</td>
-    <td>["a","b"]</td>
-  </tr>
-  <tr>
-    <td>set</td>
-    <td>Unique values</td>
-    <td>["a","b"]</td>
-  </tr>
-  <tr>
-    <td>map</td>
-    <td>Key-value pairs</td>
-    <td>{key="value"}</td>
-  </tr>
-</table>
+Create 2 EC2 instances with different types:
 
-<hr>
+### variables.tf
+```hcl
+variable "instance_type" {
+  type = list(string)
+}
+```
 
-<h2>🚀 Final Note</h2>
+### terraform.tfvars
+```hcl
+instance_type = ["t2.micro", "t2.medium"]
+```
 
-<p>
-Using type constraints is a <b>best practice</b> in Terraform.
-It helps you write clean and error-free infrastructure code.
-</p>
+### main.tf
+```hcl
+resource "aws_instance" "example" {
+  count         = 2
+  ami           = "ami-xxxx"
+  instance_type = var.instance_type[count.index]
 
-<p><b>Remember:</b></p>
-<ul>
-  <li>string → text</li>
-  <li>number → number</li>
-  <li>bool → true/false</li>
-  <li>list → ordered values</li>
-  <li>set → unique values</li>
-  <li>map → key-value</li>
-</ul>
+  tags = {
+    Name = "server-${count.index}"
+  }
+}
+```
 
-<hr>
+---
+
+## 📊 Summary Table
+
+| Type   | Description              | Example                  |
+|--------|--------------------------|--------------------------|
+| string | Text value              | "hello"                 |
+| number | Numeric value           | 100                     |
+| bool   | true/false              | true                    |
+| list   | Ordered values          | ["a","b"]              |
+| set    | Unique values           | ["a","b"]              |
+| map    | Key-value pairs         | {key="value"}          |
+
+---
+
+## 🧠 Key Takeaways
+
+- Use **string** for text  
+- Use **number** for numbers  
+- Use **bool** for true/false  
+- Use **list** for ordered multiple values  
+- Use **set** for unique values  
+- Use **map** for key-value data  
+
+---
+
+## 🚀 Final Note
+
+Using type constraints is a **best practice** in Terraform.
+
+👉 It makes your code:
+- clean  
+- safe  
+- production-ready  
+
+---
 
 <p align="center">✨ Happy Learning Terraform ✨</p>
-"""
-
-file_path = "/mnt/data/README.md"
-with open(file_path, "w") as f:
-    f.write(content)
-
-file_path
