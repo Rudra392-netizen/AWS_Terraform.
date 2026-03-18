@@ -14,3 +14,8 @@ output "instance_type" {
   value       = aws_instance.simple_ec2.instance_type
 }
 
+output "Environment" {
+  description = "Tell me the Environment we are using"
+  value       = aws_s3_bucket.example.tags["Environment"]
+
+}
