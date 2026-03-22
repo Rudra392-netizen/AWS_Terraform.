@@ -33,3 +33,17 @@ output "allowed_ports_length" {
   value       = length(var.allowed_ports)
   description = "length of the allowed ports list"
 }
+
+# output "email" {
+#   value = var.email
+
+# }
+
+output "finding_ami_id" {
+  value = lookup(var.ami_map, "us-east-5", "default-ami-id")
+}
+
+
+output "finding_instance_type" {
+  value = lookup(var.ec2_instance, "instance_type1", "default_instance_type")
+}

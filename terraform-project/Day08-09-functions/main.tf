@@ -39,3 +39,16 @@ locals {
 locals {
   allowed_ports = length(var.allowed_ports)
 }
+
+# locals {
+#   call_email = var.email
+# }
+
+
+locals {
+  ami_id = lookup(var.ami_map, "us-east-5", "default-ami-id")
+}
+
+locals {
+  type_of_instance = lookup(var.ec2_instance, "instance_type1", "default_instance_type")
+}
