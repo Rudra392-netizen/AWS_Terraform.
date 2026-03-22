@@ -34,3 +34,8 @@ locals {
   max_port = max(20, 443, 80)
   min_port = min(20, 443, 80)
 }
+
+#Find the length of all the allowed ports using the length function"
+locals {
+  allowed_ports = length(var.allowed_ports)
+}

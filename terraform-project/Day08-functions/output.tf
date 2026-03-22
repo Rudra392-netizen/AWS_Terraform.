@@ -28,3 +28,8 @@ output "allowed_ports" {
   value       = toset(var.allowed_ports)
   description = "set of all the allowed ports with unique values"
 }
+
+output "allowed_ports_length" {
+  value       = length(var.allowed_ports)
+  description = "length of the allowed ports list"
+}
