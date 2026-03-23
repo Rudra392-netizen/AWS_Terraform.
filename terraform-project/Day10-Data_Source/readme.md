@@ -31,6 +31,7 @@ from a cloud provider like AWS instead of creating new resources.
     <th>Data Source</th>
   </tr>
   <tr>
+    https://github.com/Rudra392-netizen/AWS_Terraform./blob/main/terraform-project/Day10-Data_Source/Screenshot%202026-03-23%20181733.png?raw=true
     <td>Purpose</td>
     <td>Create infrastructure</td>
     <td>Read existing infrastructure</td>
