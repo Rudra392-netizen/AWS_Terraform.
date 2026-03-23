@@ -69,3 +69,7 @@ locals {
 locals {
   set = toset(var.list)
 }
+
+locals {
+  sum_of_two_numbers = sum(var.sum)
+}

@@ -68,3 +68,8 @@ output "convert_list_to_set" {
   description = "convert a list into a set"
 
 }
+
+output "sum" {
+  value       = sum(local.sum_of_two_numbers)
+  description = "Cacculating sum of two numbers using sum()"
+}

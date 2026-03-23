@@ -82,3 +82,9 @@ variable "list" {
   type    = list(number)
   default = [10, 20, 30, 40, 40]
 }
+
+#how to use sum() in terraform
+variable "sum" {
+  type    = list(number)
+  default = [10, 20, 30, 40]
+}
